@@ -3,172 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aygül üçün Özəl 💙</title>
+    <title>Aygül üçün 💙</title>
     <style>
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #1e3c72, #2a5298, #7b1fa2, #ff758c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             overflow: hidden;
-            text-align: center;
+            color: white;
         }
 
-        .main-menu, .section, .baris-success {
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 30px;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            width: 380px;
+            text-align: center;
+            width: 400px;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             z-index: 10;
         }
 
+        h1 { font-size: 2.5em; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
         .hidden { display: none; }
 
-        h1 { font-size: 2.2em; margin-bottom: 20px; }
-        h2 { font-weight: 300; margin-bottom: 30px; }
-
-        button {
+        .btn-main {
             width: 100%;
             padding: 15px;
             margin: 10px 0;
             border: none;
             border-radius: 15px;
             font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            background: #ffcc00;
+            color: #333;
+        }
+
+        .action-btns { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+        
+        .yes-btn { 
+            background: #00ffae; 
+            color: #1e3c72; 
+            padding: 12px 30px; 
+            border-radius: 50px; 
+            border: none; 
+            cursor: pointer; 
             font-weight: bold;
+            font-size: 18px;
         }
 
-        .menu-btn { background: #ffcc00; color: #333; }
-        .menu-btn:hover { transform: scale(1.05); }
-
-        .yes-btn { background: #00ffae; color: #1e3c72; }
-        .no-btn { background: #ff4d4d; color: white; position: relative; }
-        .back-btn { background: rgba(255,255,255,0.3); color: white; font-size: 14px; width: auto; padding: 10px 20px; border-radius: 50px; }
-
-        /* BARIŞMAQ UĞURLU OLANDA */
-        .baris-success {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+        .no-btn { 
+            background: #ff4d4d; 
+            color: white; 
+            padding: 12px 30px; 
+            border-radius: 50px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 18px;
         }
 
-        .cat-image-container {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%; /* Dairəvi şəkil */
+        /* Pişik Şəkli */
+        .cat-container {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 5px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            border: 4px solid white;
         }
 
-        .cat-image-container img {
+        .cat-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Şəklin kəsilmədən sığması */
+            object-fit: cover;
         }
 
         /* Sevgi Barı */
-        .progress-container { width: 100%; background: #eee; border-radius: 20px; height: 25px; margin: 20px 0; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #ff758c, #ff4d4d); transition: width 0.5s ease; }
-        #percentText { font-size: 1.2em; font-weight: bold; color: #ff758c; }
+        .progress-container { width: 100%; background: rgba(255,255,255,0.2); border-radius: 20px; height: 30px; margin: 20px 0; overflow: hidden; }
+        .progress-bar { width: 0%; height: 100%; background: #ff4d4d; transition: width 0.4s ease; }
+        
+        .back-link { margin-top: 25px; color: #ddd; cursor: pointer; text-decoration: underline; font-size: 14px; }
 
-        /* Raket effekti */
-        .rocket { position: absolute; font-size: 40px; animation: rocketFly 2s linear forwards; }
-        @keyframes rocketFly {
-            from { bottom: -50px; left: var(--start-x); transform: rotate(0deg); }
-            to { bottom: 110vh; left: var(--end-x); transform: rotate(20deg); opacity: 0; }
-        }
+        .rocket { position: absolute; font-size: 40px; animation: flyUp 2s linear forwards; z-index: 5; }
+        @keyframes flyUp { from { bottom: -50px; } to { bottom: 110vh; opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- ANA MENYU -->
-    <div id="mainMenu" class="main-menu">
-        <h1>Xoş gəldin 💙</h1>
-        <button class="menu-btn" onclick="showSection('section1')">1. Mənimlə Barışarsan? 🥺</button>
-        <button class="menu-btn" onclick="showSection('section2')">2. Məni Sevirsən? 💖</button>
+    <!-- ANA SƏHİFƏ -->
+    <div id="mainPage" class="glass-card">
+        <h1>💙 Aygül 💙</h1>
+        <button class="btn-main" onclick="openSection('barisPage')">1. Mənimlə barışarsan? 🥺</button>
+        <button class="btn-main" onclick="openSection('sevgiPage')">2. Seviyonmu beni? 💖</button>
     </div>
 
-    <!-- BÖLMƏ 1: BARIŞMAQ -->
-    <div id="section1" class="section hidden">
-        <h2>Mənimlə barışarsan?</h2>
-        <div style="display: flex; gap: 15px;">
-            <button class="yes-btn" onclick="barisYes()">Bəli 💖</button>
-            <button class="no-btn" id="noBtn" onmouseover="moveNo()">Xeyr 😡</button>
+    <!-- BARIŞMA BÖLMƏSİ -->
+    <div id="barisPage" class="glass-card hidden">
+        <h2 id="barisTitle">Mənimlə barışarsan? 👉👈</h2>
+        
+        <div id="catArea" class="hidden">
+            <div class="cat-container">
+                <img src="image_694bde.png" alt="Pişik">
+            </div>
+            <h3>Helelelelele! 🎉 Barışdıq!</h3>
         </div>
-        <p id="baris-result"></p>
-        <button class="back-btn" onclick="goBack()">Geri</button>
-    </div>
 
-    <!-- BARIŞMAQ UĞURLU (KEDI VƏ MESAJ) -->
-    <div id="barisSuccess" class="baris-success hidden">
-        <div class="cat-image-container">
-            <!-- Şəkil faylının adını bura yazırıq -->
-            <img src="image_4.png" alt="Happy Cat">
+        <div id="barisBtns" class="action-btns">
+            <button class="yes-btn" onclick="showSuccess()">Bəli 💖</button>
+            <button class="no-btn" onclick="showWarning()">Xeyr 😡</button>
         </div>
-        <h2>Helelelelele! 🎉 Barışdıq!</h2>
-        <button class="back-btn" onclick="goBack()">Geri</button>
+        
+        <p id="warnMsg" style="color: #ffcc00; margin-top: 15px; font-weight: bold;"></p>
+        <span class="back-link" onclick="goHome()">Geri qayıt</span>
     </div>
 
-    <!-- BÖLMƏ 2: SEVGİ BARI -->
-    <div id="section2" class="section hidden">
-        <h2>Nə qədər sevirsən?</h2>
+    <!-- SEVGİ BÖLMƏSİ -->
+    <div id="sevgiPage" class="glass-card hidden">
+        <h2>Məni nə qədər sevirsən?</h2>
         <div class="progress-container">
             <div id="loveBar" class="progress-bar"></div>
         </div>
-        <p id="percentText">0%</p>
-        <button class="menu-btn" style="background: #ff758c; color: white;" onclick="fillBar()">Çox Sevirəm 😍</button>
-        <p id="finalMsg"></p>
-        <button class="back-btn" onclick="goBack()">Geri</button>
+        <h3 id="percentText">0%</h3>
+        <button class="btn-main" style="background: #ff758c; color: white;" onclick="fillLove()">Çox sevirəm! 😍</button>
+        <p id="rocketMsg" style="font-weight: bold;"></p>
+        <span class="back-link" onclick="goHome()">Geri qayıt</span>
     </div>
 
     <script>
-        function showSection(id) {
-            document.querySelectorAll('.section, .main-menu, .baris-success').forEach(el => el.classList.add('hidden'));
+        function openSection(id) {
+            document.getElementById('mainPage').classList.add('hidden');
             document.getElementById(id).classList.remove('hidden');
         }
 
-        function goBack() {
-            document.querySelectorAll('.section, .baris-success').forEach(el => el.classList.add('hidden'));
-            document.getElementById('mainMenu').classList.remove('hidden');
-            resetSections(); // Hər dəfə geri qayıdanda hər şeyi resetlə
+        function goHome() {
+            document.querySelectorAll('.glass-card').forEach(c => c.classList.add('hidden'));
+            document.getElementById('mainPage').classList.remove('hidden');
+            // Reset state
+            document.getElementById('catArea').classList.add('hidden');
+            document.getElementById('barisBtns').classList.remove('hidden');
+            document.getElementById('barisTitle').classList.remove('hidden');
+            document.getElementById('warnMsg').innerText = "";
         }
 
-        // BARIŞMAQ FUNKSİYALARI
-        function moveNo() {
-            const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-            document.getElementById('baris-result').innerText = "Yakalayamazsın ki! 😂";
+        function showWarning() {
+            document.getElementById('warnMsg').innerText = "❌ Bu seçim istifadə edilmir! 😄";
         }
 
-        function barisYes() {
-            showSection('barisSuccess'); // Kedi pəncərəsinə keç
+        function showSuccess() {
+            document.getElementById('barisTitle').classList.add('hidden');
+            document.getElementById('barisBtns').classList.add('hidden');
+            document.getElementById('warnMsg').innerText = "";
+            document.getElementById('catArea').classList.remove('hidden');
         }
 
-        // SEVGİ BARI FUNKSİYALARI
-        let currentWidth = 0;
-        function fillBar() {
-            if (currentWidth < 100) {
-                currentWidth += 20;
-                document.getElementById('loveBar').style.width = currentWidth + '%';
-                document.getElementById('percentText').innerText = currentWidth + '%';
+        let loveLevel = 0;
+        function fillLove() {
+            if (loveLevel < 100) {
+                loveLevel += 20;
+                document.getElementById('loveBar').style.width = loveLevel + '%';
+                document.getElementById('percentText').innerText = loveLevel + '%';
             }
-
-            if (currentWidth >= 100) {
-                document.getElementById('finalMsg').innerText = "VƏZİYYƏT KRİTİKDİR! SEVGİ PARTLAYIŞI! 🚀🚀🚀";
+            if (loveLevel >= 100) {
+                document.getElementById('rocketMsg').innerText = "VƏZİYYƏT KRİTİKDİR! 🚀🚀🚀";
                 for(let i=0; i<30; i++) {
                     setTimeout(createRocket, i * 100);
                 }
@@ -176,31 +192,12 @@
         }
 
         function createRocket() {
-            const rocket = document.createElement('div');
-            rocket.className = 'rocket';
-            rocket.innerHTML = '🚀';
-            rocket.style.setProperty('--start-x', Math.random() * 100 + 'vw');
-            rocket.style.setProperty('--end-x', Math.random() * 100 + 'vw');
-            rocket.style.left = rocket.style.getPropertyValue('--start-x');
-            document.body.appendChild(rocket);
-            setTimeout(() => rocket.remove(), 2000);
-        }
-
-        // RESET FUNKSİYASI
-        function resetSections() {
-            // Barışma hissəsini resetlə
-            const noBtn = document.getElementById('noBtn');
-            noBtn.style.position = 'relative';
-            noBtn.style.left = '0';
-            noBtn.style.top = '0';
-            document.getElementById('baris-result').innerText = "";
-            document.getElementById('barisSuccess').classList.add('hidden');
-
-            // Sevgi barını resetlə
-            currentWidth = 0;
-            document.getElementById('loveBar').style.width = '0%';
-            document.getElementById('percentText').innerText = '0%';
-            document.getElementById('finalMsg').innerText = "";
+            const r = document.createElement('div');
+            r.className = 'rocket';
+            r.innerHTML = '🚀';
+            r.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(r);
+            setTimeout(() => r.remove(), 2000);
         }
     </script>
 </body>
