@@ -2,162 +2,180 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<title>Aygül 💙</title>
+<title>Aygül üçün 💙</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial;
-    text-align: center;
-    background: linear-gradient(270deg, #1e3c72, #2a5298, #ff758c);
-    background-size: 600% 600%;
-    animation: bg 10s ease infinite;
-    color: white;
-}
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Rəng keçidini daha yumşaq etdik */
+        background: linear-gradient(45deg, #1e3c72, #2a5298, #7b1fa2, #ff758c);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        color: white;
+        overflow: hidden;
+    }
 
-@keyframes bg {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
-}
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-.container {
-    margin-top: 120px;
-}
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        z-index: 10;
+        max-width: 400px;
+        width: 90%;
+    }
 
-button {
-    padding: 15px 30px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    cursor: pointer;
-}
+    h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    h2 { font-weight: 300; margin-bottom: 30px; }
 
-.yes { background: #00ffae; color: black; }
-.no { background: #ff4d4d; color: white; }
-.main { background: gold; color: black; }
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        position: relative;
+    }
 
-#result {
-    margin-top: 20px;
-    font-size: 22px;
-}
+    button {
+        padding: 15px 35px;
+        border: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
 
-/* progress bar */
-.progress-container {
-    width: 80%;
-    margin: 20px auto;
-    background: rgba(255,255,255,0.2);
-    border-radius: 20px;
-    overflow: hidden;
-    display: none;
-}
+    .yes {
+        background: #00ffae;
+        color: #1e3c72;
+    }
 
-.progress-bar {
-    height: 30px;
-    width: 0%;
-    background: lime;
-    text-align: center;
-    line-height: 30px;
-    color: black;
-    font-weight: bold;
-}
+    .yes:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px #00ffae;
+    }
 
-/* confetti */
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    top: -10px;
-    animation: fall 3s linear infinite;
-}
+    /* "Xeyr" düyməsi üçün stil */
+    .no {
+        background: #ff4d4d;
+        color: white;
+        position: relative;
+    }
 
-@keyframes fall {
-    to { transform: translateY(100vh); }
-}
+    #result {
+        margin-top: 30px;
+        font-size: 20px;
+        line-height: 1.5;
+        min-height: 50px;
+    }
+
+    /* Üzən ürəklər */
+    .floating-heart {
+        position: absolute;
+        bottom: -100px;
+        font-size: 20px;
+        opacity: 0.6;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
 </style>
 </head>
-
 <body>
 
+<!-- Arxa fonda uçuşan ürəklər üçün boş sahə -->
+<div id="heart-bg"></div>
+
 <div class="container">
+    <h1>💙 Aygül 💙</h1>
+    <h2>Mənimlə barışarsan? 🥺</h2>
 
-    <!-- 1-ci ekran -->
-    <div id="first">
-        <button class="main" onclick="showOptions()">💙 Barışmak istəyirəm</button>
+    <div class="btn-group">
+        <button class="yes" onclick="yesClick()">Bəli 💖</button>
+        <button class="no" id="noBtn" onmouseover="moveButton()">Xeyr 😡</button>
     </div>
-
-    <!-- 2-ci ekran -->
-    <div id="second" style="display:none;">
-        <h2>Mənimlə barışarsan? 🥺</h2>
-        <button class="yes" onclick="yesClick()">Evet 💖</button>
-        <button class="no" onclick="noClick()">Hayır 😡</button>
-
-        <br><br>
-
-        <button class="main" onclick="loveClick()">❤️ Beni seviyonmu?</button>
-    </div>
-
-    <!-- progress -->
-    <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar">0%</div>
-    </div>
-
-    <button id="fillBtn" class="yes" style="display:none;" onclick="fillBar()">
-        Çox seviyom 💙
-    </button>
 
     <div id="result"></div>
-
 </div>
 
 <script>
-let progress = 0;
-
-function showOptions() {
-    document.getElementById("first").style.display = "none";
-    document.getElementById("second").style.display = "block";
+// "Xeyr" düyməsinin qaçma funksiyası (zarafat məqsədli)
+function moveButton() {
+    const btn = document.getElementById('noBtn');
+    const x = Math.random() * (window.innerWidth - btn.clientWidth);
+    const y = Math.random() * (window.innerHeight - btn.clientHeight);
+    
+    btn.style.position = 'fixed';
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
 }
 
 function yesClick() {
-    document.getElementById("result").innerHTML =
-    "💙 Mən Muhammedali, səninlə barışmaq istəyirəm!";
-}
+    // "Xeyr" düyməsini gizlət
+    document.getElementById('noBtn').style.display = 'none';
+    
+    document.getElementById("result").innerHTML = 
+    "🎉 Səni çox sevirəm! <br> Barışdığımız üçün çox xoşbəxtəm 💙";
 
-function noClick() {
-    document.getElementById("result").innerHTML =
-    "❌ Bu seçim istifadə edilmir 😄";
-}
-
-function loveClick() {
-    document.getElementById("progressContainer").style.display = "block";
-    document.getElementById("fillBtn").style.display = "inline-block";
-}
-
-function fillBar() {
-    if (progress < 100) {
-        progress += 20;
-        document.getElementById("progressBar").style.width = progress + "%";
-        document.getElementById("progressBar").innerText = progress + "%";
-    }
-
-    if (progress >= 100) {
-        launchConfetti();
-    }
-}
-
-function launchConfetti() {
+    // Daha çox konfeti
     for (let i = 0; i < 100; i++) {
-        let c = document.createElement("div");
-        c.classList.add("confetti");
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
-        c.style.animationDuration = (Math.random()*3+2) + "s";
-        document.body.appendChild(c);
+        createParticle();
     }
+}
 
-    document.getElementById("result").innerHTML =
-    "💖 100% SEVİYORUMMM 💖";
+// Arxa fonda daim uçan ürəklər yaradan funksiya
+function createFloatingHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💙";
+    heart.className = "floating-heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => { heart.remove(); }, 6000);
+}
+
+setInterval(createFloatingHeart, 400);
+
+function createParticle() {
+    const c = document.createElement("div");
+    c.style.position = "fixed";
+    c.style.width = "10px";
+    c.style.height = "10px";
+    c.style.backgroundColor = "hsl(" + Math.random()*360 + ",100%,50%)";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = "-10px";
+    c.style.borderRadius = "50%";
+    c.style.zIndex = "100";
+    
+    const anim = c.animate([
+        { transform: 'translateY(0) rotate(0)', opacity: 1 },
+        { transform: `translateY(100vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
+    ], {
+        duration: Math.random() * 3000 + 2000,
+        easing: 'linear'
+    });
+
+    document.body.appendChild(c);
+    anim.onfinish = () => c.remove();
 }
 </script>
 
